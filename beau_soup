@@ -1,0 +1,30 @@
+#!/usr/bin/python
+import urllib2
+import requests
+import time
+from bs4 import BeautifulSoup
+from bs4.diagnose import diagnose
+
+opener = urllib2.urlopen('http://jhu.eblib.com/patron/SearchResults.aspx?ca=1&t=category&r=15&fl=1&p=1&echo=1&userid=ndone1&tstamp=1422465074&id=54094c481a187813fab351f5e6b9cbb3e901419c&extsrc=shib-eppn&patrontype=STUDENT%40johnshopkins.edu%3bMEMBER%40johnshopkins.edu'), 'lxml')
+soup = BeautifulSoup(opener)
+
+while True:
+
+
+for tag in soup.find_all(class_='search-result'):
+    print(tag.name)
+
+
+
+
+
+html = requests.get("http://www.theworldcounts.com/counters/shocking_environmental_facts_and_statistics/world_population_clock_live").text
+
+while True:
+    soup = BeautifulSoup(html)
+    body = soup.find(text="World population").find_previous('p')
+    if str(body.text).find('loading...') > 1:
+        print (body.text)
+        break
+    time.sleep(30)
+    html = requests.get("http://www.theworldcounts.com/counters/shocking_environmental_facts_and_statistics/world_population_clock_live").text
